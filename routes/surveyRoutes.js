@@ -11,7 +11,7 @@ const Survey = mongoose.model('surveys'); //we require it this way to avoid issu
 
 module.exports = app => {
   app.get('/api/surveys', requireLogin, async (req, res) => {
-    const surveys = await Survey.find({ _user: req.user.id });
+    const surveys = await Survey.find({ _user: req.user.id }).select({ recipients: false }); //do not include recipients 
 
     res.send(surveys);
   })
